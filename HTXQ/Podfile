@@ -1,0 +1,16 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '9.0'
+
+use_frameworks!
+inhibit_all_warnings!
+
+target 'HTXQ' do
+  pod 'SnapKit'
+  pod 'Moya'
+  pod 'HandyJSON', '~> 4.0.0-beta.1'
+  pod 'MJRefresh'
+  pod 'IQKeyboardManagerSwift'
+  pod 'YYKit'
+  pod 'HMSegmentedControl'
+  pod 'MBProgressHUD'
+end
