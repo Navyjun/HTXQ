@@ -1,14 +1,14 @@
 //
-//  HTBaseCollectionViewCell.swift
+//  HTBaseCollectionReusableView.swift
 //  HTXQ
 //
-//  Created by 张海军 on 2018/1/24.
+//  Created by 张海军 on 2018/1/25.
 //  Copyright © 2018年 baoqianli. All rights reserved.
 //
 
 import UIKit
 
-class HTBaseCollectionViewCell: UICollectionViewCell {
+class HTBaseCollectionReusableView: UICollectionReusableView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,5 +20,4 @@ class HTBaseCollectionViewCell: UICollectionViewCell {
     }
     
     open func setupUI() {}
-    
 }

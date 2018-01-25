@@ -30,6 +30,9 @@
 		EEA3CDAC2015C2D100D334E2 /* HTMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3CDAB2015C2D100D334E2 /* HTMeViewController.swift */; };
 		EEA3CDAE2015D76C00D334E2 /* HTPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3CDAD2015D76C00D334E2 /* HTPageViewController.swift */; };
 		EEA3CDB22015E7CE00D334E2 /* HTGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3CDB12015E7CE00D334E2 /* HTGlobal.swift */; };
+		EEE3CDE720198CDE00B2AD38 /* HTInterestReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE3CDE620198CDE00B2AD38 /* HTInterestReusableView.swift */; };
+		EEE3CDE920198D5300B2AD38 /* HTBaseCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE3CDE820198D5300B2AD38 /* HTBaseCollectionReusableView.swift */; };
+		EEE3CDEE2019AD6D00B2AD38 /* HJCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE3CDED2019AD6D00B2AD38 /* HJCollectionViewWaterfallLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +62,11 @@
 		EEA3CDAB2015C2D100D334E2 /* HTMeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMeViewController.swift; sourceTree = "<group>"; };
 		EEA3CDAD2015D76C00D334E2 /* HTPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTPageViewController.swift; sourceTree = "<group>"; };
 		EEA3CDB12015E7CE00D334E2 /* HTGlobal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTGlobal.swift; sourceTree = "<group>"; };
+		EEE3CDE620198CDE00B2AD38 /* HTInterestReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTInterestReusableView.swift; sourceTree = "<group>"; };
+		EEE3CDE820198D5300B2AD38 /* HTBaseCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTBaseCollectionReusableView.swift; sourceTree = "<group>"; };
+		EEE3CDEB2019AD6C00B2AD38 /* HTXQ-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HTXQ-Bridging-Header.h"; sourceTree = "<group>"; };
+		EEE3CDEC2019AD6D00B2AD38 /* HJCollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJCollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
+		EEE3CDED2019AD6D00B2AD38 /* HJCollectionViewWaterfallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJCollectionViewWaterfallLayout.m; sourceTree = "<group>"; };
 		F5E0436BE1F76918F8498887 /* Pods-HTXQ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HTXQ.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HTXQ/Pods-HTXQ.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,6 +138,7 @@
 		EEA3CD7F2015BD5700D334E2 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				EEE3CDEA2019AD4A00B2AD38 /* Coustem */,
 				EEA3CD852015BE0F00D334E2 /* System */,
 				EEA3CD862015BE1C00D334E2 /* Base */,
 				EEA3CD802015BD6700D334E2 /* Topic (专题) */,
@@ -262,6 +271,7 @@
 				EE80C9AD201879B50064B5B7 /* HTBaseTableViewCell.swift */,
 				EE80C9AF201879D30064B5B7 /* HTBaseCollectionViewCell.swift */,
 				EE80C9B1201879E20064B5B7 /* HTBaseView.swift */,
+				EEE3CDE820198D5300B2AD38 /* HTBaseCollectionReusableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -374,6 +384,7 @@
 			isa = PBXGroup;
 			children = (
 				EE80C9B520187CCE0064B5B7 /* HTInterestHeadCell.swift */,
+				EEE3CDE620198CDE00B2AD38 /* HTInterestReusableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -401,6 +412,16 @@
 				EEA3CDB12015E7CE00D334E2 /* HTGlobal.swift */,
 			);
 			path = HTGlobal;
+			sourceTree = "<group>";
+		};
+		EEE3CDEA2019AD4A00B2AD38 /* Coustem */ = {
+			isa = PBXGroup;
+			children = (
+				EEE3CDEC2019AD6D00B2AD38 /* HJCollectionViewWaterfallLayout.h */,
+				EEE3CDED2019AD6D00B2AD38 /* HJCollectionViewWaterfallLayout.m */,
+				EEE3CDEB2019AD6C00B2AD38 /* HTXQ-Bridging-Header.h */,
+			);
+			path = Coustem;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -439,6 +460,7 @@
 				TargetAttributes = {
 					EEA3CD692015B48A00D334E2 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -534,10 +556,13 @@
 				EEA3CDAA2015C2C300D334E2 /* HTFairViewController.swift in Sources */,
 				EEA3CD8C2015BEB300D334E2 /* HTBaseViewController.swift in Sources */,
 				EEA3CDB22015E7CE00D334E2 /* HTGlobal.swift in Sources */,
+				EEE3CDE920198D5300B2AD38 /* HTBaseCollectionReusableView.swift in Sources */,
 				EEA3CDA62015C28300D334E2 /* HTTopicViewController.swift in Sources */,
 				EE80C9B420187A520064B5B7 /* HTBaseCollectionViewController.swift in Sources */,
 				EE80C9B2201879E20064B5B7 /* HTBaseView.swift in Sources */,
 				EEA3CDA02015BF7000D334E2 /* HTBaseTableViewController.swift in Sources */,
+				EEE3CDEE2019AD6D00B2AD38 /* HJCollectionViewWaterfallLayout.m in Sources */,
+				EEE3CDE720198CDE00B2AD38 /* HTInterestReusableView.swift in Sources */,
 				EE58253A20186BF7009F5FED /* HTInterestGorpModel.swift in Sources */,
 				EEA3CDAE2015D76C00D334E2 /* HTPageViewController.swift in Sources */,
 				EEA3CDA42015C04600D334E2 /* HTTabBarController.swift in Sources */,
@@ -675,6 +700,7 @@
 			baseConfigurationReference = F5E0436BE1F76918F8498887 /* Pods-HTXQ.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VR747BYW76;
 				INFOPLIST_FILE = "$(SRCROOT)/HTXQ/Resource/plist/Info.plist";
@@ -682,6 +708,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.baoqianli.HTXQ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "HTXQ/Class/Coustem/HTXQ-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -692,6 +720,7 @@
 			baseConfigurationReference = E47456154650AF57C6B85002 /* Pods-HTXQ.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VR747BYW76;
 				INFOPLIST_FILE = "$(SRCROOT)/HTXQ/Resource/plist/Info.plist";
@@ -699,6 +728,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.baoqianli.HTXQ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "HTXQ/Class/Coustem/HTXQ-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -13,6 +13,10 @@ public let kScreenWidth = UIScreen.main.bounds.width
 public let kScreenHeight = UIScreen.main.bounds.height
 public let kNavBarH = 64.0
 
+public let kPlaceholder = "placehodlerX"
+public let kPlaceholderBig = "LOGO_85x85_"
+
+public let kloadSuccessCode = "000000"
 
 /// 随机色
 ///

@@ -72,8 +72,8 @@ class HTPageViewController: HTBaseViewController {
         switch pageStyle {
         case .navigationBarStyle:
             segment.backgroundColor = UIColor.clear
-            segment.titleTextAttributes = [NSAttributedStringKey.font:UIFont.systemFont(ofSize: 20), NSAttributedStringKey.foregroundColor:UIColor.init(hexString: "999999")!]
-            segment.selectedTitleTextAttributes = [NSAttributedStringKey.font:UIFont.systemFont(ofSize: 20), NSAttributedStringKey.foregroundColor:UIColor.init(hexString: "333333")!]
+            segment.titleTextAttributes = [NSAttributedStringKey.font:UIFont.systemFont(ofSize: 17), NSAttributedStringKey.foregroundColor:UIColor.init(hexString: "999999")!]
+            segment.selectedTitleTextAttributes = [NSAttributedStringKey.font:UIFont.systemFont(ofSize: 17), NSAttributedStringKey.foregroundColor:UIColor.init(hexString: "333333")!]
             segment.selectionStyle = .textWidthStripe
             segment.selectionIndicatorLocation = .down
             segment.selectionIndicatorColor = UIColor.black
