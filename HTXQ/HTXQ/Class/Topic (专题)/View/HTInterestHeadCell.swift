@@ -37,6 +37,7 @@ class HTInterestHeadCell: HTBaseCollectionViewCell {
     
     
     override func setupUI() {
+        self.backgroundColor = UIColor.white
         addSubview(collectionView)
         collectionView.snp.makeConstraints {
             $0.left.top.right.equalToSuperview()

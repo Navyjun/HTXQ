@@ -8,6 +8,8 @@
 
 import UIKit
 import SnapKit
+import Alamofire
+import HandyJSON
 
 public let kScreenWidth = UIScreen.main.bounds.width
 public let kScreenHeight = UIScreen.main.bounds.height
@@ -66,5 +68,32 @@ extension ConstraintView {
         } else {
             return self.snp
         }
+    }
+}
+
+
+/// 通过URL地址获取图片信息
+/// 
+/// - Parameter urlStr: 图片URL地址
+/// - Returns: 图片信息模型
+func getImageInfo(item:PlateViewsItem, completion:((_ item:PlateViewsItem)->())?) {
+    let url = URL.init(string: item.coverImg!)!
+    request(url,
+            method: .get,
+            parameters: ["x-oss-process":"image/info"],
+            encoding: URLEncoding.default,
+            headers: nil).response { (result) in
+                let jsonString = String(data: (result.data)!, encoding: .utf8)
+                guard let model = JSONDeserializer<HTImageInfoItem>.deserializeFrom(json: jsonString) else{
+                    return
+                }
+                guard completion != nil else{
+                    return
+                }
+                let ow:NSString = ((model.ImageWidth?.value?.isEmpty)! ? "0" : model.ImageWidth?.value)! as NSString
+                let oh:NSString = ((model.ImageHeight?.value?.isEmpty)! ? "0" : model.ImageHeight?.value)! as NSString
+                item.ImageHeight = item.ImageWidth * CGFloat(oh.floatValue) / CGFloat(ow.floatValue)
+                completion!(item)
+                
     }
 }

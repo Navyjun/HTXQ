@@ -15,14 +15,17 @@ enum PlateViewModelStyle {
     case modelForRecommends
 }
 
-struct GruopModel: HandyJSON {
+class GruopModel: HandyJSON {
     var communityHomePageFirstPlateView     : PlateViewModel?
     var communityHomePageSecondPlateView    : PlateViewModel?
     var communityHomePageWaterFallPlateView : PlateViewModel?
     
+    required init() {
+        
+    }
 }
 
-struct PlateViewModel: HandyJSON {
+class PlateViewModel: HandyJSON {
     var name       :String?
     var identifier :String?
     var itemCount  :Int = 0
@@ -32,12 +35,12 @@ struct PlateViewModel: HandyJSON {
     
     var articleForFirstPlateViews   :[PlateViewsItem]?
     var categoryForSecondPlateViews :[PlateViewsItem]?
-    var articleWaterFallPlateViews :[PlateViewsItem] = []
+    var articleWaterFallPlateViews  = [PlateViewsItem]()
     
     var headCellStyle               :InterestHeadStyle?
     
     var PlateViews :[PlateViewsItem]?{
-        mutating get{
+        get{
             if modelStyle == .modelForBanner {
                 return articleForFirstPlateViews
             }else if modelStyle == .modelForSpecial {
@@ -50,15 +53,23 @@ struct PlateViewModel: HandyJSON {
         }
     }
     
+    required init() {
+        
+    }
+    
 }
 
-struct RecommendArticleItemList: HandyJSON {
+class RecommendArticleItemList: HandyJSON {
     var code : String!
     var text : String!
     var data : [PlateViewsItem]?
+    
+    required init() {
+        
+    }
 }
 
-struct PlateViewsItem: HandyJSON{
+class PlateViewsItem: HandyJSON{
     var articleId :String?
     var cnName    :String?
     var detailUrl :String?
@@ -76,6 +87,12 @@ struct PlateViewsItem: HandyJSON{
     
     var isVideo   :Bool = false
     
+    var ImageHeight :CGFloat = 0
+    var ImageWidth  :CGFloat = 0
+    let bottomH:CGFloat = 60
     
+    required init() {
+        
+    }
 }
 

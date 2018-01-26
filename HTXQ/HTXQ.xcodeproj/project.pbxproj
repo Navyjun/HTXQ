@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		4648CD9F4B75BB7858DB8243 /* Pods_HTXQ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A3688C0103B550CF243F5F /* Pods_HTXQ.framework */; };
+		EE49C4E7201AD3FF00A5E605 /* HTITWaterfallCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE49C4E6201AD3FF00A5E605 /* HTITWaterfallCell.swift */; };
+		EE49C4E9201B056400A5E605 /* HTImageInfoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE49C4E8201B056400A5E605 /* HTImageInfoItem.swift */; };
+		EE49C4EC201B275100A5E605 /* HTRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE49C4EB201B275100A5E605 /* HTRefresh.swift */; };
 		EE5825382018393D009F5FED /* HTResearchSocietyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5825372018393D009F5FED /* HTResearchSocietyVC.swift */; };
 		EE58253A20186BF7009F5FED /* HTInterestGorpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE58253920186BF7009F5FED /* HTInterestGorpModel.swift */; };
 		EE5B78E12016D41E00254A8E /* HTInterestGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5B78E02016D41E00254A8E /* HTInterestGroupVC.swift */; };
@@ -38,6 +41,9 @@
 /* Begin PBXFileReference section */
 		D3A3688C0103B550CF243F5F /* Pods_HTXQ.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HTXQ.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E47456154650AF57C6B85002 /* Pods-HTXQ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HTXQ.release.xcconfig"; path = "Pods/Target Support Files/Pods-HTXQ/Pods-HTXQ.release.xcconfig"; sourceTree = "<group>"; };
+		EE49C4E6201AD3FF00A5E605 /* HTITWaterfallCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTITWaterfallCell.swift; sourceTree = "<group>"; };
+		EE49C4E8201B056400A5E605 /* HTImageInfoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTImageInfoItem.swift; sourceTree = "<group>"; };
+		EE49C4EB201B275100A5E605 /* HTRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTRefresh.swift; sourceTree = "<group>"; };
 		EE5825372018393D009F5FED /* HTResearchSocietyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTResearchSocietyVC.swift; sourceTree = "<group>"; };
 		EE58253920186BF7009F5FED /* HTInterestGorpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTInterestGorpModel.swift; sourceTree = "<group>"; };
 		EE5B78E02016D41E00254A8E /* HTInterestGroupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTInterestGroupVC.swift; sourceTree = "<group>"; };
@@ -97,6 +103,14 @@
 				D3A3688C0103B550CF243F5F /* Pods_HTXQ.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EE49C4EA201B273300A5E605 /* Refresh */ = {
+			isa = PBXGroup;
+			children = (
+				EE49C4EB201B275100A5E605 /* HTRefresh.swift */,
+			);
+			path = Refresh;
 			sourceTree = "<group>";
 		};
 		EE5B78E22017050000254A8E /* HTTP */ = {
@@ -279,6 +293,7 @@
 		EEA3CD8F2015BECD00D334E2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EE49C4E8201B056400A5E605 /* HTImageInfoItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -385,6 +400,7 @@
 			children = (
 				EE80C9B520187CCE0064B5B7 /* HTInterestHeadCell.swift */,
 				EEE3CDE620198CDE00B2AD38 /* HTInterestReusableView.swift */,
+				EE49C4E6201AD3FF00A5E605 /* HTITWaterfallCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -400,6 +416,7 @@
 		EEA3CDAF2015E79300D334E2 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				EE49C4EA201B273300A5E605 /* Refresh */,
 				EE5B78E22017050000254A8E /* HTTP */,
 				EEA3CDB02015E7B000D334E2 /* HTGlobal */,
 			);
@@ -551,8 +568,10 @@
 				EE5825382018393D009F5FED /* HTResearchSocietyVC.swift in Sources */,
 				EEA3CDA82015C2B400D334E2 /* HTFindViewController.swift in Sources */,
 				EEA3CDAC2015C2D100D334E2 /* HTMeViewController.swift in Sources */,
+				EE49C4EC201B275100A5E605 /* HTRefresh.swift in Sources */,
 				EEA3CD6E2015B48A00D334E2 /* AppDelegate.swift in Sources */,
 				EE80C9B0201879D30064B5B7 /* HTBaseCollectionViewCell.swift in Sources */,
+				EE49C4E9201B056400A5E605 /* HTImageInfoItem.swift in Sources */,
 				EEA3CDAA2015C2C300D334E2 /* HTFairViewController.swift in Sources */,
 				EEA3CD8C2015BEB300D334E2 /* HTBaseViewController.swift in Sources */,
 				EEA3CDB22015E7CE00D334E2 /* HTGlobal.swift in Sources */,
@@ -561,6 +580,7 @@
 				EE80C9B420187A520064B5B7 /* HTBaseCollectionViewController.swift in Sources */,
 				EE80C9B2201879E20064B5B7 /* HTBaseView.swift in Sources */,
 				EEA3CDA02015BF7000D334E2 /* HTBaseTableViewController.swift in Sources */,
+				EE49C4E7201AD3FF00A5E605 /* HTITWaterfallCell.swift in Sources */,
 				EEE3CDEE2019AD6D00B2AD38 /* HJCollectionViewWaterfallLayout.m in Sources */,
 				EEE3CDE720198CDE00B2AD38 /* HTInterestReusableView.swift in Sources */,
 				EE58253A20186BF7009F5FED /* HTInterestGorpModel.swift in Sources */,

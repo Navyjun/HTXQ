@@ -9,9 +9,14 @@
 import UIKit
 import HandyJSON
 import Alamofire
+import MJRefresh
 
 class HTInterestGroupVC: HTBaseCollectionViewController {
     
+    let lineInteritemSpacing:CGFloat = 6
+    let waterfallLREdgeInset:CGFloat = 15
+    let waterfallItemW = (kScreenWidth - 30 - 6)*0.5
+   
     var groupDataArray = [PlateViewModel]()
     var waterFallM : PlateViewModel?
     var currentPageNo  = 0
@@ -26,13 +31,18 @@ class HTInterestGroupVC: HTBaseCollectionViewController {
     
     lazy var collectionView: UICollectionView = {
         let cv = UICollectionView.init(frame: .zero, collectionViewLayout: flowLayout)
-        cv.backgroundColor = UIColor.clear
+        cv.backgroundColor = UIColor.init(hexString: "f0f0f0")
         cv.delegate = self
         cv.dataSource = self
         cv.register(HTInterestHeadCell.self, forCellWithReuseIdentifier: NSStringFromClass(HTInterestHeadCell.self))
-        
+        cv.register(HTITWaterfallCell.self, forCellWithReuseIdentifier: NSStringFromClass(HTITWaterfallCell.self))
         cv.register(HTInterestReusableView.self, forSupplementaryViewOfKind: HJElementKindSectionHeader, withReuseIdentifier: NSStringFromClass(HTInterestReusableView.self))
-        
+        cv.htHead = HTRefreshAutoHeader{ [weak self] in
+            self!.loadHeadData()
+        }
+        cv.htFoot = HTRefreshAutoFooter { [weak self] in
+            self!.loadRecommendArticleData(false)
+        }
         return cv
     }()
 
@@ -54,40 +64,44 @@ class HTInterestGroupVC: HTBaseCollectionViewController {
     }
 
     private func loadHeadData()  {
-        ApiLoadingProvider.request(HTApi.getHomePage(city: "深圳"),
-                                   model: GruopModel.self) { (groupM, stateCode) in
-                                
-                                    guard stateCode == kloadSuccessCode else{ return }
+        self.groupDataArray.removeAll()
+        ApiLoadingProvider.request(HTApi.getHomePage(city: "深圳"), model: GruopModel.self) { [weak self] (groupM, stateCode) in
+            self?.collectionView.htHead.endRefreshing()
+            guard stateCode == kloadSuccessCode else{ return }
 
-                                    guard (groupM != nil) else{ return }
-                                    
-                                    self.loadRecommendArticleData(true)
-                                    
-                                    var firstM = groupM!.communityHomePageFirstPlateView
-                                    if firstM != nil {
-                                        firstM!.itemCount = 1
-                                        firstM!.columCountAtSection = 1
-                                        firstM!.modelStyle = .modelForBanner
-                                        firstM!.headCellStyle = .bannerStyle
-                                        firstM!.identifier = NSStringFromClass(HTInterestHeadCell.self)
-                                        self.groupDataArray.append(firstM!)
-                                    }
-                                
-                                    var secondM = groupM!.communityHomePageSecondPlateView
-                                    if secondM != nil {
-                                        secondM!.itemCount = 1
-                                        secondM!.columCountAtSection = 1
-                                        secondM!.modelStyle = .modelForSpecial
-                                        secondM!.headCellStyle = .specialStyle
-                                        secondM!.identifier = NSStringFromClass(HTInterestHeadCell.self)
-                                        self.groupDataArray.append(secondM!)
-                                    }
-                                    
-                                    self.waterFallM = groupM!.communityHomePageWaterFallPlateView
-                                    
-                                    self.collectionView.reloadData()
-                                    
-                                    
+            guard (groupM != nil) else{ return }
+            
+            let firstM = groupM!.communityHomePageFirstPlateView
+            if firstM != nil {
+                firstM!.itemCount = 1
+                firstM!.columCountAtSection = 1
+                firstM!.modelStyle = .modelForBanner
+                firstM!.headCellStyle = .bannerStyle
+                firstM!.identifier = NSStringFromClass(HTInterestHeadCell.self)
+                self!.groupDataArray.append(firstM!)
+            }
+        
+            let secondM = groupM!.communityHomePageSecondPlateView
+            if secondM != nil {
+                secondM!.itemCount = 1
+                secondM!.columCountAtSection = 1
+                secondM!.modelStyle = .modelForSpecial
+                secondM!.headCellStyle = .specialStyle
+                secondM!.identifier = NSStringFromClass(HTInterestHeadCell.self)
+                self!.groupDataArray.append(secondM!)
+            }
+            
+            let waterFallM = groupM!.communityHomePageWaterFallPlateView
+            if waterFallM != nil {
+                waterFallM!.itemCount = 0
+                waterFallM!.columCountAtSection = 2
+                waterFallM!.modelStyle = .modelForRecommends
+                waterFallM!.identifier = NSStringFromClass(HTITWaterfallCell.self)
+                self!.waterFallM = waterFallM
+                self!.groupDataArray.append(self!.waterFallM!)
+                self!.loadRecommendArticleData(true)
+            }
+            self!.collectionView.reloadData()
         }
     }
     
@@ -96,7 +110,11 @@ class HTInterestGroupVC: HTBaseCollectionViewController {
             currentPageNo = 0
         }
     
-        ApiLoadingProvider.request(HTApi.getRecommendArticleList(pageIndex: currentPageNo)) { (result) in
+        ApiLoadingProvider.request(HTApi.getRecommendArticleList(pageIndex: currentPageNo)) { [weak self] (result) in
+            HTLog("++++foot refresh++++++\(String(describing: self?.currentPageNo))")
+            if !first {
+                self?.collectionView.htFoot.endRefreshing()
+            }
             
             if result.error != nil {
                 return
@@ -107,20 +125,29 @@ class HTInterestGroupVC: HTBaseCollectionViewController {
                 return
             }
             
-            guard model.data != nil && self.waterFallM != nil else{
+            guard model.data != nil && self!.waterFallM != nil else{
                 return
             }
     
+            self!.currentPageNo += 1
+            
+            var array = [PlateViewsItem]()
+            
             for item in model.data! {
-                self.waterFallM?.articleWaterFallPlateViews.append(item)
+                item.ImageWidth = self!.waterfallItemW
+                getImageInfo(item: item, completion: { (newItem) in
+                   array.append(item)
+                   if array.count == 20 {
+                    self!.waterFallM!.articleWaterFallPlateViews.append(contentsOf: array)
+                    self!.waterFallM!.itemCount = self!.waterFallM!.articleWaterFallPlateViews.count
+                    self!.collectionView.reloadData()
+                   }
+                })
             }
-            
-            self.groupDataArray.insert(self.waterFallM!, at: 2)
-            
-            HTLog(self.waterFallM?.articleWaterFallPlateViews.count)
+
         }
     }
-
+    
 }
 
 extension HTInterestGroupVC : UICollectionViewDataSource, HJCollectionViewWaterfallLayoutDelegate{
@@ -136,20 +163,30 @@ extension HTInterestGroupVC : UICollectionViewDataSource, HJCollectionViewWaterf
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let model: PlateViewModel = groupDataArray[indexPath.section]
-        let cell: HTInterestHeadCell = collectionView.dequeueReusableCell(withReuseIdentifier: model.identifier!, for: indexPath) as! HTInterestHeadCell
-        cell.refreshCell(model)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: model.identifier!, for: indexPath)
+        if model.modelStyle == .modelForSpecial || model.modelStyle == .modelForBanner {
+            let headCell = cell as! HTInterestHeadCell
+            headCell.refreshCell(model)
+            return headCell
+        }else if model.modelStyle == .modelForRecommends {
+            let waterfallCell = cell as! HTITWaterfallCell
+            waterfallCell.refreshData(item: model.PlateViews![indexPath.item])
+            return waterfallCell
+        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
 
+        let model: PlateViewModel = groupDataArray[indexPath.section]
         var reusableView = UICollectionReusableView()
         
-        if kind == HJElementKindSectionHeader && indexPath.section > 0 {
+        if kind == HJElementKindSectionHeader && (model.modelStyle == .modelForSpecial || model.modelStyle == .modelForRecommends) {
             let model: PlateViewModel = groupDataArray[indexPath.section]
             reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: HJElementKindSectionHeader, withReuseIdentifier: NSStringFromClass(HTInterestReusableView.self), for: indexPath)
             if reusableView.isKind(of: HTInterestReusableView.self) {
                 let head = reusableView as! HTInterestReusableView
+                head.backgroundColor = model.modelStyle == .modelForSpecial ? UIColor.white : UIColor.clear
                 head.titleLabel.text = model.name
             }
         }
@@ -157,25 +194,7 @@ extension HTInterestGroupVC : UICollectionViewDataSource, HJCollectionViewWaterf
         return reusableView
     }
     
-    /*
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let model: PlateViewModel = groupDataArray[indexPath.section]
-        let ms = model.modelStyle
-        if ms == .modelForBanner || ms == .modelForSpecial {
-            return CGSize.init(width: kScreenWidth, height: HTInterestHeadCell.getCellH(model.headCellStyle!))
-        }else{
-            return CGSize.zero
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        if section > 0 {
-            return CGSize.init(width: kScreenWidth, height: 55)
-        }
-        return CGSize.zero
-    }
-    */
-    
+   
     func hj_collectionView(_ collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, columCountAtSection section: Int) -> Int {
         let model: PlateViewModel = groupDataArray[section]
         return model.columCountAtSection
@@ -186,13 +205,17 @@ extension HTInterestGroupVC : UICollectionViewDataSource, HJCollectionViewWaterf
         let ms = model.modelStyle
         if ms == .modelForBanner || ms == .modelForSpecial {
             return CGSize.init(width: kScreenWidth, height: HTInterestHeadCell.getCellH(model.headCellStyle!))
+        }else if ms == .modelForRecommends{
+            let item = model.PlateViews![indexPath.item]
+            return CGSize.init(width: item.ImageWidth, height: item.ImageHeight+item.bottomH)
         }else{
             return CGSize.zero
         }
     }
     
     func hj_collectionView(_ collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, heightForHeaderAtSection section: Int) -> CGFloat {
-        if section > 0 {
+        let model: PlateViewModel = groupDataArray[section]
+        if model.modelStyle == .modelForSpecial || model.modelStyle == .modelForRecommends {
             return 55
         }
         return 0
@@ -201,7 +224,7 @@ extension HTInterestGroupVC : UICollectionViewDataSource, HJCollectionViewWaterf
     func hj_collectionView(_ collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, insetForSection section: Int) -> UIEdgeInsets {
         let model: PlateViewModel = groupDataArray[section]
         if model.modelStyle == PlateViewModelStyle.modelForRecommends {
-            return UIEdgeInsetsMake(0, 15, 0, -15)
+            return UIEdgeInsetsMake(0, waterfallLREdgeInset, 0, waterfallLREdgeInset)
         }
         return UIEdgeInsets.zero
     }
@@ -209,7 +232,7 @@ extension HTInterestGroupVC : UICollectionViewDataSource, HJCollectionViewWaterf
     func hj_collectionView(_ collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, minimumInteritemSpacingForSection section: Int) -> CGFloat {
         let model: PlateViewModel = groupDataArray[section]
         if model.modelStyle == PlateViewModelStyle.modelForRecommends {
-            return 8
+            return lineInteritemSpacing
         }
         return 0
     }
@@ -217,10 +240,9 @@ extension HTInterestGroupVC : UICollectionViewDataSource, HJCollectionViewWaterf
     func hj_collectionView(_ collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, minimumLineSpacingForSection section: Int) -> CGFloat {
         let model: PlateViewModel = groupDataArray[section]
         if model.modelStyle == PlateViewModelStyle.modelForRecommends {
-            return 8
+            return lineInteritemSpacing
         }
         return 0
     }
 }
-
 

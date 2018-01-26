@@ -112,6 +112,10 @@ extension MoyaProvider {
         
         return request(target, completion: { (result) in
             guard let completion = completion else { return }
+            if result.error != nil {
+                completion(nil,"出错")
+                return
+            }
             guard let returnData = try? result.value?.mapModel(ResponseData<T>.self) else {
                 completion(nil,"解析出错")
                 return
