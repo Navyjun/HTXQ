@@ -21,6 +21,14 @@ extension UIScrollView {
     }
 }
 
-class HTRefreshAutoHeader: MJRefreshHeader {}
+class HTRefreshAutoHeader: MJRefreshHeader {
+    override func prepare() {
+        super.prepare()
+    }
+}
 
-class HTRefreshAutoFooter: MJRefreshAutoFooter {}
+class HTRefreshAutoFooter: MJRefreshAutoFooter {
+    override func prepare() {
+        super.prepare()
+    }
+}

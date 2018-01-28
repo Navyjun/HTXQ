@@ -10,12 +10,15 @@ import UIKit
 import HandyJSON
 import Alamofire
 import MJRefresh
+import MBProgressHUD
+import YYKit
 
 class HTInterestGroupVC: HTBaseCollectionViewController {
     
+    let waterfallColumCount = 2
     let lineInteritemSpacing:CGFloat = 6
-    let waterfallLREdgeInset:CGFloat = 15
-    let waterfallItemW = (kScreenWidth - 30 - 6)*0.5
+    let waterfallLREdgeInset:CGFloat = 10
+    let waterfallItemW = (kScreenWidth - 20 - 6)*0.5
    
     var groupDataArray = [PlateViewModel]()
     var waterFallM : PlateViewModel?
@@ -94,7 +97,7 @@ class HTInterestGroupVC: HTBaseCollectionViewController {
             let waterFallM = groupM!.communityHomePageWaterFallPlateView
             if waterFallM != nil {
                 waterFallM!.itemCount = 0
-                waterFallM!.columCountAtSection = 2
+                waterFallM!.columCountAtSection = self!.waterfallColumCount
                 waterFallM!.modelStyle = .modelForRecommends
                 waterFallM!.identifier = NSStringFromClass(HTITWaterfallCell.self)
                 self!.waterFallM = waterFallM
@@ -107,43 +110,56 @@ class HTInterestGroupVC: HTBaseCollectionViewController {
     
     func loadRecommendArticleData(_ first: Bool) {
         if first {
-            currentPageNo = 0
+            currentPageNo = 8
         }
     
         ApiLoadingProvider.request(HTApi.getRecommendArticleList(pageIndex: currentPageNo)) { [weak self] (result) in
             HTLog("++++foot refresh++++++\(String(describing: self?.currentPageNo))")
-            if !first {
-                self?.collectionView.htFoot.endRefreshing()
-            }
             
             if result.error != nil {
+                self?.collectionView.htFoot.endRefreshing()
                 return
             }
             
             let jsonString = String(data: (result.value?.data)!, encoding: .utf8)
             guard let model = JSONDeserializer<RecommendArticleItemList>.deserializeFrom(json: jsonString) else{
+                self?.collectionView.htFoot.endRefreshing()
                 return
             }
             
             guard model.data != nil && self!.waterFallM != nil else{
+                self?.collectionView.htFoot.endRefreshing()
                 return
             }
-    
-            self!.currentPageNo += 1
             
+            if model.data?.count == 0 {
+                self?.collectionView.htFoot.endRefreshing()
+                return
+            }
+        
             var array = [PlateViewsItem]()
-            
+            MBProgressHUD.showAdded(to: self!.view, animated: false)
             for item in model.data! {
                 item.ImageWidth = self!.waterfallItemW
+                
                 getImageInfo(item: item, completion: { (newItem) in
                    array.append(item)
-                   if array.count == 20 {
+                    
+                   if array.count == model.data!.count {
+                    self!.currentPageNo += 1
                     self!.waterFallM!.articleWaterFallPlateViews.append(contentsOf: array)
                     self!.waterFallM!.itemCount = self!.waterFallM!.articleWaterFallPlateViews.count
                     self!.collectionView.reloadData()
+                    MBProgressHUD.hide(for: self!.view, animated: false)
+                    
+                    if !first {
+                        self?.collectionView.htFoot.endRefreshing()
+                     }
+                    
                    }
                 })
             }
+            
 
         }
     }

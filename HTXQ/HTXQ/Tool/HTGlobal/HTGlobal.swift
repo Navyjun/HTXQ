@@ -73,7 +73,7 @@ extension ConstraintView {
 
 
 /// 通过URL地址获取图片信息
-/// 
+/// http://static.htxq.net/UploadFiles/2017/03/16/20170316122510583258.jpg?x-oss-process=image/info
 /// - Parameter urlStr: 图片URL地址
 /// - Returns: 图片信息模型
 func getImageInfo(item:PlateViewsItem, completion:((_ item:PlateViewsItem)->())?) {
@@ -90,9 +90,12 @@ func getImageInfo(item:PlateViewsItem, completion:((_ item:PlateViewsItem)->())?
                 guard completion != nil else{
                     return
                 }
-                let ow:NSString = ((model.ImageWidth?.value?.isEmpty)! ? "0" : model.ImageWidth?.value)! as NSString
-                let oh:NSString = ((model.ImageHeight?.value?.isEmpty)! ? "0" : model.ImageHeight?.value)! as NSString
+                let ow:NSString = ((model.ImageWidth?.value == nil) ? "0" : model.ImageWidth?.value)! as NSString
+                let oh:NSString = ((model.ImageHeight?.value == nil) ? "0" : model.ImageHeight?.value)! as NSString
+                let fz:NSString = ((model.FileSize?.value == nil) ? "0" : model.FileSize?.value)! as NSString
                 item.ImageHeight = item.ImageWidth * CGFloat(oh.floatValue) / CGFloat(ow.floatValue)
+                item.FileSize = fz.integerValue
+                //NSLog("%@--%@--%d", item.coverImg ?? "",fz,item.FileSize)
                 completion!(item)
                 
     }

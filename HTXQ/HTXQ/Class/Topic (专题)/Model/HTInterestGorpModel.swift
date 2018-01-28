@@ -28,7 +28,7 @@ class GruopModel: HandyJSON {
 class PlateViewModel: HandyJSON {
     var name       :String?
     var identifier :String?
-    var itemCount  :Int = 0
+    var itemCount  = 0
     var columCountAtSection :Int = 1
     
     var modelStyle :PlateViewModelStyle!
@@ -87,8 +87,9 @@ class PlateViewsItem: HandyJSON{
     
     var isVideo   :Bool = false
     
+    var FileSize    :Int = 0
     var ImageHeight :CGFloat = 0
-    var ImageWidth  :CGFloat = 0
+    var ImageWidth  :CGFloat = 0 //3522827
     let bottomH:CGFloat = 60
     
     required init() {

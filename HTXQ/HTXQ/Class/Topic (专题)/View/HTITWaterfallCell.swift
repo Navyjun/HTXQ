@@ -20,7 +20,7 @@ class HTITWaterfallCell: HTBaseCollectionViewCell {
     lazy var imageView :UIImageView = {
         let iv = UIImageView()
         iv.clipsToBounds = true
-        iv.contentMode = .scaleAspectFit
+        iv.contentMode = .scaleAspectFill
         self.addSubview(iv)
         return iv
     }()
@@ -46,8 +46,8 @@ class HTITWaterfallCell: HTBaseCollectionViewCell {
     }
     
     override func setupUI() {
-        self.backgroundColor = UIColor.clear
-        bottomView.backgroundColor = UIColor.white
+        self.backgroundColor = UIColor.white
+        bottomView.backgroundColor = UIColor.clear
         self.addSubview(bottomView)
         bottomView.snp.makeConstraints {
             $0.left.bottom.right.equalToSuperview()
@@ -85,15 +85,22 @@ class HTITWaterfallCell: HTBaseCollectionViewCell {
     public func refreshData(item:PlateViewsItem) {
         
         titleLabel.text = item.name ?? ""
-        topLabel.text = item.cateName ?? ""
+        topLabel.text = item.cateName == nil ? "" : ("#"+item.cateName!)
         readCountLabel.text = "\(item.readCount)"
         
-        
         imageView.cancelCurrentImageRequest()
-        imageView.setImageWith(URL.init(string: item.coverImg ?? ""), placeholder: UIImage.init(named: kPlaceholder), options: .avoidSetImage) { [weak self] (image, url, from, stage, error) in
-            if image != nil {
-                self!.imageView.image = image
+        
+        imageView.setImageWith(URL.init(string: item.coverImg ?? ""), placeholder: nil, options: .avoidSetImage, completion: { (image, url, from, stage, error) in
+            guard image != nil else{ return }
+            let filesize = Int((image?.size.width)!) * Int((image?.size.height)!)
+            if filesize > 500000 {
+                let newImg = image?.byResize(to: CGSize.init(width: item.ImageWidth, height: item.ImageHeight))
+                guard newImg != nil else{ return }
+                YYImageCache.shared().setImage(newImg!, forKey: item.coverImg!)
+                self.imageView.image = newImg
+            }else{
+                self.imageView.image = image
             }
-        }
+        })
     }
 }
