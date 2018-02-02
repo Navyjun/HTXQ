@@ -9,10 +9,15 @@
 import UIKit
 
 class HTBaseViewController: UIViewController {
+    
+    lazy var fpsLabel :YYFPSLabel = {
+        let fps = YYFPSLabel()
+        return fps
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.init(hexString: "fafafa")
         setupUI()
     }
 
@@ -25,4 +30,11 @@ class HTBaseViewController: UIViewController {
     open func setupUI() {
     }
 
+    func addFpsLabel()  {
+        self.view.addSubview(fpsLabel)
+        fpsLabel.snp.makeConstraints {
+            $0.left.equalToSuperview().offset(12)
+            $0.bottom.equalToSuperview().offset(-61)
+        }
+    }
 }

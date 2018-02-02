@@ -19,6 +19,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let TabVC = HTTabBarController()
         window!.rootViewController = TabVC
         window!.makeKeyAndVisible()
+        
+        // 适配iOS11
+//        if #available(iOS 11.0, *) {
+//            UIScrollView.appearance().contentInsetAdjustmentBehavior = .never
+//        } else {
+//
+//        }
+        
         return true
     }
 

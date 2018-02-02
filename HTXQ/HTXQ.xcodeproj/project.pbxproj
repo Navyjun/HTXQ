@@ -33,6 +33,22 @@
 		EEA3CDAC2015C2D100D334E2 /* HTMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3CDAB2015C2D100D334E2 /* HTMeViewController.swift */; };
 		EEA3CDAE2015D76C00D334E2 /* HTPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3CDAD2015D76C00D334E2 /* HTPageViewController.swift */; };
 		EEA3CDB22015E7CE00D334E2 /* HTGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3CDB12015E7CE00D334E2 /* HTGlobal.swift */; };
+		EEC383B4202463C9008A1963 /* HTFSubscribeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC383B1202463C9008A1963 /* HTFSubscribeViewController.swift */; };
+		EEC383B5202463C9008A1963 /* HTFCircleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC383B2202463C9008A1963 /* HTFCircleViewController.swift */; };
+		EEC383B6202463C9008A1963 /* HTFRecommendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC383B3202463C9008A1963 /* HTFRecommendViewController.swift */; };
+		EEC383BB202463D7008A1963 /* HTDisBannerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC383B7202463D7008A1963 /* HTDisBannerCell.swift */; };
+		EEC383BC202463D7008A1963 /* HTDisBbsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEC383B8202463D7008A1963 /* HTDisBbsCell.xib */; };
+		EEC383BD202463D7008A1963 /* HTDisBbsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC383B9202463D7008A1963 /* HTDisBbsCell.swift */; };
+		EEC383BE202463D7008A1963 /* HTDisRecommenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC383BA202463D7008A1963 /* HTDisRecommenCell.swift */; };
+		EEC383C0202463E1008A1963 /* HTFindModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC383BF202463E1008A1963 /* HTFindModel.swift */; };
+		EEC383C220246411008A1963 /* HTResearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC383C120246411008A1963 /* HTResearchModel.swift */; };
+		EEC383C420246425008A1963 /* HTRCTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC383C320246425008A1963 /* HTRCTableViewCell.swift */; };
+		EEC383CA2024644E008A1963 /* ZCycleLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC383C62024644E008A1963 /* ZCycleLayout.swift */; };
+		EEC383CB2024644E008A1963 /* ZCycleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC383C72024644E008A1963 /* ZCycleView.swift */; };
+		EEC383CC2024644E008A1963 /* ZCycleViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC383C82024644E008A1963 /* ZCycleViewCell.swift */; };
+		EEC383CD2024644E008A1963 /* ZPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC383C92024644E008A1963 /* ZPageControl.swift */; };
+		EEC383D22024648C008A1963 /* YYFPSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC383CE2024648C008A1963 /* YYFPSLabel.m */; };
+		EEC383D32024648C008A1963 /* BDHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC383D12024648C008A1963 /* BDHelper.m */; };
 		EEE3CDE720198CDE00B2AD38 /* HTInterestReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE3CDE620198CDE00B2AD38 /* HTInterestReusableView.swift */; };
 		EEE3CDE920198D5300B2AD38 /* HTBaseCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE3CDE820198D5300B2AD38 /* HTBaseCollectionReusableView.swift */; };
 		EEE3CDEE2019AD6D00B2AD38 /* HJCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE3CDED2019AD6D00B2AD38 /* HJCollectionViewWaterfallLayout.m */; };
@@ -68,6 +84,24 @@
 		EEA3CDAB2015C2D100D334E2 /* HTMeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMeViewController.swift; sourceTree = "<group>"; };
 		EEA3CDAD2015D76C00D334E2 /* HTPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTPageViewController.swift; sourceTree = "<group>"; };
 		EEA3CDB12015E7CE00D334E2 /* HTGlobal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTGlobal.swift; sourceTree = "<group>"; };
+		EEC383B1202463C9008A1963 /* HTFSubscribeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTFSubscribeViewController.swift; sourceTree = "<group>"; };
+		EEC383B2202463C9008A1963 /* HTFCircleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTFCircleViewController.swift; sourceTree = "<group>"; };
+		EEC383B3202463C9008A1963 /* HTFRecommendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTFRecommendViewController.swift; sourceTree = "<group>"; };
+		EEC383B7202463D7008A1963 /* HTDisBannerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTDisBannerCell.swift; sourceTree = "<group>"; };
+		EEC383B8202463D7008A1963 /* HTDisBbsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HTDisBbsCell.xib; sourceTree = "<group>"; };
+		EEC383B9202463D7008A1963 /* HTDisBbsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTDisBbsCell.swift; sourceTree = "<group>"; };
+		EEC383BA202463D7008A1963 /* HTDisRecommenCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTDisRecommenCell.swift; sourceTree = "<group>"; };
+		EEC383BF202463E1008A1963 /* HTFindModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTFindModel.swift; sourceTree = "<group>"; };
+		EEC383C120246411008A1963 /* HTResearchModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTResearchModel.swift; sourceTree = "<group>"; };
+		EEC383C320246425008A1963 /* HTRCTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTRCTableViewCell.swift; sourceTree = "<group>"; };
+		EEC383C62024644E008A1963 /* ZCycleLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZCycleLayout.swift; sourceTree = "<group>"; };
+		EEC383C72024644E008A1963 /* ZCycleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZCycleView.swift; sourceTree = "<group>"; };
+		EEC383C82024644E008A1963 /* ZCycleViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZCycleViewCell.swift; sourceTree = "<group>"; };
+		EEC383C92024644E008A1963 /* ZPageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZPageControl.swift; sourceTree = "<group>"; };
+		EEC383CE2024648C008A1963 /* YYFPSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYFPSLabel.m; sourceTree = "<group>"; };
+		EEC383CF2024648C008A1963 /* YYFPSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYFPSLabel.h; sourceTree = "<group>"; };
+		EEC383D02024648C008A1963 /* BDHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDHelper.h; sourceTree = "<group>"; };
+		EEC383D12024648C008A1963 /* BDHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDHelper.m; sourceTree = "<group>"; };
 		EEE3CDE620198CDE00B2AD38 /* HTInterestReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTInterestReusableView.swift; sourceTree = "<group>"; };
 		EEE3CDE820198D5300B2AD38 /* HTBaseCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTBaseCollectionReusableView.swift; sourceTree = "<group>"; };
 		EEE3CDEB2019AD6C00B2AD38 /* HTXQ-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HTXQ-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -366,6 +400,9 @@
 		EEA3CD992015BF1D00D334E2 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				EEC383B2202463C9008A1963 /* HTFCircleViewController.swift */,
+				EEC383B3202463C9008A1963 /* HTFRecommendViewController.swift */,
+				EEC383B1202463C9008A1963 /* HTFSubscribeViewController.swift */,
 				EEA3CDA72015C2B400D334E2 /* HTFindViewController.swift */,
 			);
 			path = Controller;
@@ -374,6 +411,10 @@
 		EEA3CD9A2015BF2500D334E2 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EEC383B7202463D7008A1963 /* HTDisBannerCell.swift */,
+				EEC383B9202463D7008A1963 /* HTDisBbsCell.swift */,
+				EEC383B8202463D7008A1963 /* HTDisBbsCell.xib */,
+				EEC383BA202463D7008A1963 /* HTDisRecommenCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -381,6 +422,7 @@
 		EEA3CD9B2015BF2A00D334E2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EEC383BF202463E1008A1963 /* HTFindModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -401,6 +443,7 @@
 				EE80C9B520187CCE0064B5B7 /* HTInterestHeadCell.swift */,
 				EEE3CDE620198CDE00B2AD38 /* HTInterestReusableView.swift */,
 				EE49C4E6201AD3FF00A5E605 /* HTITWaterfallCell.swift */,
+				EEC383C320246425008A1963 /* HTRCTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -408,6 +451,7 @@
 		EEA3CD9E2015BF3E00D334E2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EEC383C120246411008A1963 /* HTResearchModel.swift */,
 				EE58253920186BF7009F5FED /* HTInterestGorpModel.swift */,
 			);
 			path = Model;
@@ -416,6 +460,7 @@
 		EEA3CDAF2015E79300D334E2 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				EEC383C52024644E008A1963 /* ZCycleView */,
 				EE49C4EA201B273300A5E605 /* Refresh */,
 				EE5B78E22017050000254A8E /* HTTP */,
 				EEA3CDB02015E7B000D334E2 /* HTGlobal */,
@@ -431,9 +476,24 @@
 			path = HTGlobal;
 			sourceTree = "<group>";
 		};
+		EEC383C52024644E008A1963 /* ZCycleView */ = {
+			isa = PBXGroup;
+			children = (
+				EEC383C62024644E008A1963 /* ZCycleLayout.swift */,
+				EEC383C72024644E008A1963 /* ZCycleView.swift */,
+				EEC383C82024644E008A1963 /* ZCycleViewCell.swift */,
+				EEC383C92024644E008A1963 /* ZPageControl.swift */,
+			);
+			path = ZCycleView;
+			sourceTree = "<group>";
+		};
 		EEE3CDEA2019AD4A00B2AD38 /* Coustem */ = {
 			isa = PBXGroup;
 			children = (
+				EEC383D02024648C008A1963 /* BDHelper.h */,
+				EEC383D12024648C008A1963 /* BDHelper.m */,
+				EEC383CF2024648C008A1963 /* YYFPSLabel.h */,
+				EEC383CE2024648C008A1963 /* YYFPSLabel.m */,
 				EEE3CDEC2019AD6D00B2AD38 /* HJCollectionViewWaterfallLayout.h */,
 				EEE3CDED2019AD6D00B2AD38 /* HJCollectionViewWaterfallLayout.m */,
 				EEE3CDEB2019AD6C00B2AD38 /* HTXQ-Bridging-Header.h */,
@@ -506,6 +566,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEA3CD782015B48A00D334E2 /* LaunchScreen.storyboard in Resources */,
+				EEC383BC202463D7008A1963 /* HTDisBbsCell.xib in Resources */,
 				EEA3CD752015B48A00D334E2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -591,30 +652,45 @@
 			files = (
 				EE5825382018393D009F5FED /* HTResearchSocietyVC.swift in Sources */,
 				EEA3CDA82015C2B400D334E2 /* HTFindViewController.swift in Sources */,
+				EEC383BB202463D7008A1963 /* HTDisBannerCell.swift in Sources */,
 				EEA3CDAC2015C2D100D334E2 /* HTMeViewController.swift in Sources */,
+				EEC383BE202463D7008A1963 /* HTDisRecommenCell.swift in Sources */,
 				EE49C4EC201B275100A5E605 /* HTRefresh.swift in Sources */,
+				EEC383CB2024644E008A1963 /* ZCycleView.swift in Sources */,
 				EEA3CD6E2015B48A00D334E2 /* AppDelegate.swift in Sources */,
 				EE80C9B0201879D30064B5B7 /* HTBaseCollectionViewCell.swift in Sources */,
+				EEC383C220246411008A1963 /* HTResearchModel.swift in Sources */,
+				EEC383CD2024644E008A1963 /* ZPageControl.swift in Sources */,
 				EE49C4E9201B056400A5E605 /* HTImageInfoItem.swift in Sources */,
 				EEA3CDAA2015C2C300D334E2 /* HTFairViewController.swift in Sources */,
 				EEA3CD8C2015BEB300D334E2 /* HTBaseViewController.swift in Sources */,
 				EEA3CDB22015E7CE00D334E2 /* HTGlobal.swift in Sources */,
 				EEE3CDE920198D5300B2AD38 /* HTBaseCollectionReusableView.swift in Sources */,
+				EEC383BD202463D7008A1963 /* HTDisBbsCell.swift in Sources */,
 				EEA3CDA62015C28300D334E2 /* HTTopicViewController.swift in Sources */,
+				EEC383C0202463E1008A1963 /* HTFindModel.swift in Sources */,
 				EE80C9B420187A520064B5B7 /* HTBaseCollectionViewController.swift in Sources */,
 				EE80C9B2201879E20064B5B7 /* HTBaseView.swift in Sources */,
+				EEC383CC2024644E008A1963 /* ZCycleViewCell.swift in Sources */,
 				EEA3CDA02015BF7000D334E2 /* HTBaseTableViewController.swift in Sources */,
+				EEC383B4202463C9008A1963 /* HTFSubscribeViewController.swift in Sources */,
 				EE49C4E7201AD3FF00A5E605 /* HTITWaterfallCell.swift in Sources */,
 				EEE3CDEE2019AD6D00B2AD38 /* HJCollectionViewWaterfallLayout.m in Sources */,
+				EEC383D22024648C008A1963 /* YYFPSLabel.m in Sources */,
 				EEE3CDE720198CDE00B2AD38 /* HTInterestReusableView.swift in Sources */,
+				EEC383B5202463C9008A1963 /* HTFCircleViewController.swift in Sources */,
+				EEC383CA2024644E008A1963 /* ZCycleLayout.swift in Sources */,
+				EEC383C420246425008A1963 /* HTRCTableViewCell.swift in Sources */,
 				EE58253A20186BF7009F5FED /* HTInterestGorpModel.swift in Sources */,
 				EEA3CDAE2015D76C00D334E2 /* HTPageViewController.swift in Sources */,
+				EEC383D32024648C008A1963 /* BDHelper.m in Sources */,
 				EEA3CDA42015C04600D334E2 /* HTTabBarController.swift in Sources */,
 				EE80C9B620187CCE0064B5B7 /* HTInterestHeadCell.swift in Sources */,
 				EE5B78E42017078B00254A8E /* HTAPI.swift in Sources */,
 				EE5B78E12016D41E00254A8E /* HTInterestGroupVC.swift in Sources */,
 				EE80C9AE201879B50064B5B7 /* HTBaseTableViewCell.swift in Sources */,
 				EEA3CDA22015C03300D334E2 /* HTNavigationController.swift in Sources */,
+				EEC383B6202463C9008A1963 /* HTFRecommendViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

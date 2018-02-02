@@ -18,14 +18,20 @@ class HTTabBarController: UITabBarController {
                                                      HTResearchSocietyVC()],
                                                titles: ["兴趣组","研究社"],
                                                style: .navigationBarStyle)
-
+        
         addChildVC(pageVC,
                    "专题",
                    "tb_0")
         
-        addChildVC(HTFindViewController(),
+        let findVC = HTFindViewController.init(vcs: [HTFRecommendViewController(),
+                                                     HTFCircleViewController(),
+                                                     HTFSubscribeViewController()],
+                                               titles: ["推荐","圈子","订阅"],
+                                               style: .navigationBarStyle)
+        
+        addChildVC(findVC,
                    "发现",
-                   "tb_10")
+                   "tb_1")
         
         addChildVC(HTFairViewController(),
                    "市集",
@@ -51,7 +57,7 @@ class HTTabBarController: UITabBarController {
         viewCotroller.tabBarItem.setTitleTextAttributes(seleAtt, for: .selected)
         
         viewCotroller.tabBarItem.image = UIImage.init(named: imgStr)
-        viewCotroller.tabBarItem.selectedImage = UIImage.init(named: imgStr+"_selected")
+        viewCotroller.tabBarItem.selectedImage = UIImage.init(named: imgStr+"_selected")?.withRenderingMode(.alwaysOriginal)
         
         let NavVC = HTNavigationController.init(rootViewController: viewCotroller)
         self.addChildViewController(NavVC)

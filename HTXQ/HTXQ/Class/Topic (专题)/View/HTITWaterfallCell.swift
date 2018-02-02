@@ -16,6 +16,7 @@ class HTITWaterfallCell: HTBaseCollectionViewCell {
     let readImage = UIImageView.init(image: UIImage.init(named: "hp_count"))
     var dataItem :PlateViewsItem?
     
+    let playImg = UIImageView.init(image: UIImage.init(named: "video-play"))
     
     lazy var imageView :UIImageView = {
         let iv = UIImageView()
@@ -26,15 +27,15 @@ class HTITWaterfallCell: HTBaseCollectionViewCell {
     }()
     
     lazy var titleLabel:UILabel = {
-        return creationLable(textC: UIColor.black, font: 16.0)
+        return creationLable(textC: UIColor.black, font: 14.0)
     }()
     
     lazy var topLabel:UILabel = {
-        return creationLable(textC: UIColor.init(hexString: "999999")!, font: 14.0)
+        return creationLable(textC: UIColor.init(hexString: "999999")!, font: 12.0)
     }()
     
     lazy var readCountLabel:UILabel = {
-        return creationLable(textC: UIColor.init(hexString: "999999")!, font: 14.0)
+        return creationLable(textC: UIColor.init(hexString: "999999")!, font: 12.0)
     }()
     
     func creationLable(textC:UIColor, font:CGFloat) -> UILabel {
@@ -80,6 +81,11 @@ class HTITWaterfallCell: HTBaseCollectionViewCell {
             $0.left.top.right.equalToSuperview()
             $0.bottom.equalTo(bottomView.snp.top)
         }
+        
+        addSubview(playImg)
+        playImg.snp.makeConstraints {
+            $0.center.equalTo(imageView.snp.center)
+        }
     }
     
     public func refreshData(item:PlateViewsItem) {
@@ -87,11 +93,12 @@ class HTITWaterfallCell: HTBaseCollectionViewCell {
         titleLabel.text = item.name ?? ""
         topLabel.text = item.cateName == nil ? "" : ("#"+item.cateName!)
         readCountLabel.text = "\(item.readCount)"
+        playImg.isHidden = !item.isVideo
         
-        imageView.cancelCurrentImageRequest()
-        
+        //imageView.cancelCurrentImageRequest()
         imageView.setImageWith(URL.init(string: item.coverImg ?? ""), placeholder: nil, options: .avoidSetImage, completion: { (image, url, from, stage, error) in
             guard image != nil else{ return }
+            self.imageView.layer.removeAllAnimations()
             let filesize = Int((image?.size.width)!) * Int((image?.size.height)!)
             if filesize > 500000 {
                 let newImg = image?.byResize(to: CGSize.init(width: item.ImageWidth, height: item.ImageHeight))
@@ -100,6 +107,13 @@ class HTITWaterfallCell: HTBaseCollectionViewCell {
                 self.imageView.image = newImg
             }else{
                 self.imageView.image = image
+            }
+            if from != YYWebImageFromType.memoryCacheFast {
+                let transition = CATransition()
+                transition.duration = 0.15
+                transition.timingFunction = CAMediaTimingFunction.init(name: kCAMediaTimingFunctionEaseOut)
+                transition.type = kCATransitionFade
+                self.imageView.layer.add(transition, forKey: "contents")
             }
         })
     }

@@ -31,7 +31,7 @@ class HTPageViewController: HTBaseViewController {
     }()
     
     lazy var pageController:UIPageViewController = {
-        let pc = UIPageViewController.init(transitionStyle: .pageCurl, navigationOrientation: .horizontal, options: nil)
+        let pc = UIPageViewController.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         pc.dataSource = self
         pc.delegate = self
         return pc
@@ -93,7 +93,6 @@ class HTPageViewController: HTBaseViewController {
         }
         segment.sectionTitles = titles
         segment.selectedSegmentIndex = selectedIndex
-        
     }
    
 }

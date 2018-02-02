@@ -11,7 +11,7 @@ import UIKit
 
 class HTTopicViewController: HTPageViewController {
     
-    let segmentWidth:CGFloat = 180.0
+    let segmentWidth:CGFloat = 150.0
     let segmentHeight:CGFloat = 44.0
 
     override func viewDidLoad() {

@@ -28,6 +28,18 @@ public func randColor() -> UIColor {
 }
 
 
+/// rgb
+///
+/// - Parameters:
+///   - r: 红色
+///   - g: 绿色
+///   - b: 蓝色
+///   - alpha: 透明度
+/// - Returns: uicolor
+public func HTColor(_ r:CGFloat, _ g:CGFloat, _ b:CGFloat, _ alpha:CGFloat) -> UIColor {
+    return UIColor.init(red: r/255, green: g/255, blue: b/255, alpha: alpha)
+}
+
 /// 获取当前顶层控制器
 ///
 /// - Returns: 顶层控制器
@@ -73,30 +85,32 @@ extension ConstraintView {
 
 
 /// 通过URL地址获取图片信息
-/// http://static.htxq.net/UploadFiles/2017/03/16/20170316122510583258.jpg?x-oss-process=image/info
+///
 /// - Parameter urlStr: 图片URL地址
 /// - Returns: 图片信息模型
-func getImageInfo(item:PlateViewsItem, completion:((_ item:PlateViewsItem)->())?) {
+func getImageInfo(item:PlateViewsItem, completion:((_ item:PlateViewsItem?, _ error:Error?)->())?) {
     let url = URL.init(string: item.coverImg!)!
     request(url,
             method: .get,
             parameters: ["x-oss-process":"image/info"],
             encoding: URLEncoding.default,
             headers: nil).response { (result) in
+                guard completion != nil else{ return }
+                if result.error != nil {
+                    completion!(nil,result.error)
+                    return
+                }
                 let jsonString = String(data: (result.data)!, encoding: .utf8)
                 guard let model = JSONDeserializer<HTImageInfoItem>.deserializeFrom(json: jsonString) else{
                     return
                 }
-                guard completion != nil else{
-                    return
-                }
+                
                 let ow:NSString = ((model.ImageWidth?.value == nil) ? "0" : model.ImageWidth?.value)! as NSString
                 let oh:NSString = ((model.ImageHeight?.value == nil) ? "0" : model.ImageHeight?.value)! as NSString
                 let fz:NSString = ((model.FileSize?.value == nil) ? "0" : model.FileSize?.value)! as NSString
                 item.ImageHeight = item.ImageWidth * CGFloat(oh.floatValue) / CGFloat(ow.floatValue)
                 item.FileSize = fz.integerValue
-                //NSLog("%@--%@--%d", item.coverImg ?? "",fz,item.FileSize)
-                completion!(item)
+                completion!(item,nil)
                 
     }
 }

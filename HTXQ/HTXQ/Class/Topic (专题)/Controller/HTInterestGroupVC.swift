@@ -34,7 +34,7 @@ class HTInterestGroupVC: HTBaseCollectionViewController {
     
     lazy var collectionView: UICollectionView = {
         let cv = UICollectionView.init(frame: .zero, collectionViewLayout: flowLayout)
-        cv.backgroundColor = UIColor.init(hexString: "f0f0f0")
+        cv.backgroundColor = UIColor.init(hexString: "fafafa")
         cv.delegate = self
         cv.dataSource = self
         cv.register(HTInterestHeadCell.self, forCellWithReuseIdentifier: NSStringFromClass(HTInterestHeadCell.self))
@@ -46,8 +46,11 @@ class HTInterestGroupVC: HTBaseCollectionViewController {
         cv.htFoot = HTRefreshAutoFooter { [weak self] in
             self!.loadRecommendArticleData(false)
         }
+        cv.htFoot.isHidden = true
         return cv
     }()
+    
+  
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,17 +67,22 @@ class HTInterestGroupVC: HTBaseCollectionViewController {
             $0.top.equalToSuperview().offset(kNavBarH)
             $0.left.right.bottom.equalToSuperview()
         }
+        
+        self.addFpsLabel()
     }
 
     private func loadHeadData()  {
         self.groupDataArray.removeAll()
-        ApiLoadingProvider.request(HTApi.getHomePage(city: "深圳"), model: GruopModel.self) { [weak self] (groupM, stateCode) in
+        ApiLoadingProvider.request(HTApi.getHomePage(city: "深圳"), model: GroupModelList.self) { [weak self] (groupM, error) in
             self?.collectionView.htHead.endRefreshing()
-            guard stateCode == kloadSuccessCode else{ return }
-
-            guard (groupM != nil) else{ return }
             
-            let firstM = groupM!.communityHomePageFirstPlateView
+            if error != nil {
+                return
+            }
+
+            guard (groupM?.data != nil) else{ return }
+            
+            let firstM = groupM!.data?.communityHomePageFirstPlateView
             if firstM != nil {
                 firstM!.itemCount = 1
                 firstM!.columCountAtSection = 1
@@ -84,7 +92,7 @@ class HTInterestGroupVC: HTBaseCollectionViewController {
                 self!.groupDataArray.append(firstM!)
             }
         
-            let secondM = groupM!.communityHomePageSecondPlateView
+            let secondM = groupM!.data?.communityHomePageSecondPlateView
             if secondM != nil {
                 secondM!.itemCount = 1
                 secondM!.columCountAtSection = 1
@@ -94,7 +102,7 @@ class HTInterestGroupVC: HTBaseCollectionViewController {
                 self!.groupDataArray.append(secondM!)
             }
             
-            let waterFallM = groupM!.communityHomePageWaterFallPlateView
+            let waterFallM = groupM!.data?.communityHomePageWaterFallPlateView
             if waterFallM != nil {
                 waterFallM!.itemCount = 0
                 waterFallM!.columCountAtSection = self!.waterfallColumCount
@@ -110,58 +118,67 @@ class HTInterestGroupVC: HTBaseCollectionViewController {
     
     func loadRecommendArticleData(_ first: Bool) {
         if first {
-            currentPageNo = 8
+            currentPageNo = 0
         }
-    
-        ApiLoadingProvider.request(HTApi.getRecommendArticleList(pageIndex: currentPageNo)) { [weak self] (result) in
-            HTLog("++++foot refresh++++++\(String(describing: self?.currentPageNo))")
-            
-            if result.error != nil {
-                self?.collectionView.htFoot.endRefreshing()
-                return
-            }
-            
-            let jsonString = String(data: (result.value?.data)!, encoding: .utf8)
-            guard let model = JSONDeserializer<RecommendArticleItemList>.deserializeFrom(json: jsonString) else{
-                self?.collectionView.htFoot.endRefreshing()
-                return
-            }
-            
-            guard model.data != nil && self!.waterFallM != nil else{
-                self?.collectionView.htFoot.endRefreshing()
-                return
-            }
-            
-            if model.data?.count == 0 {
-                self?.collectionView.htFoot.endRefreshing()
-                return
-            }
         
+        ApiLoadingProvider.request(HTApi.getRecommendArticleList(pageIndex: currentPageNo), model: RecommendArticleItemList.self) { [weak self] (model, error) in
+            if !first {
+                self!.collectionView.htFoot.isHidden = false
+            }
+            self?.collectionView.htFoot.state = .idle
+            if error != nil || model == nil{
+               self?.collectionView.htFoot.endRefreshing()
+               return
+            }
+            
+            guard model!.data != nil && self!.waterFallM != nil else{
+                self?.collectionView.htFoot.endRefreshing()
+                return
+            }
+            
+            if model!.data?.count == 0 {
+                self?.collectionView.htFoot.endRefreshingWithNoMoreData()
+                return
+            }
+            
             var array = [PlateViewsItem]()
+            
+           
             MBProgressHUD.showAdded(to: self!.view, animated: false)
-            for item in model.data! {
+            
+            
+            for item in model!.data! {
                 item.ImageWidth = self!.waterfallItemW
                 
-                getImageInfo(item: item, completion: { (newItem) in
-                   array.append(item)
-                    
-                   if array.count == model.data!.count {
-                    self!.currentPageNo += 1
-                    self!.waterFallM!.articleWaterFallPlateViews.append(contentsOf: array)
-                    self!.waterFallM!.itemCount = self!.waterFallM!.articleWaterFallPlateViews.count
-                    self!.collectionView.reloadData()
-                    MBProgressHUD.hide(for: self!.view, animated: false)
-                    
-                    if !first {
-                        self?.collectionView.htFoot.endRefreshing()
-                     }
-                    
-                   }
+                getImageInfo(item: item, completion: { (newItem,error) in
+                    if error != nil || newItem == nil {
+                        MBProgressHUD.hide(for: self!.view, animated: false)
+                        if !first {
+                               self?.collectionView.htFoot.endRefreshing()
+                        }else{
+                            self!.collectionView.htFoot.isHidden = false
+                        }
+                        return
+                    }
+                        
+                    array.append(newItem!)
+                    if array.count == model!.data!.count {
+                        self!.currentPageNo += 1
+                        self!.waterFallM!.articleWaterFallPlateViews.append(contentsOf: array)
+                        self!.waterFallM!.itemCount = self!.waterFallM!.articleWaterFallPlateViews.count
+                        self!.collectionView.reloadData()
+                        MBProgressHUD.hide(for: self!.view, animated: false)
+                        
+                        if !first {
+                            self?.collectionView.htFoot.endRefreshing()
+                        }else{
+                            self!.collectionView.htFoot.isHidden = false
+                        }
+                    }
                 })
             }
-            
-
         }
+    
     }
     
 }

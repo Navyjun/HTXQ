@@ -15,14 +15,20 @@ enum PlateViewModelStyle {
     case modelForRecommends
 }
 
+class GroupModelList: HandyJSON {
+    var code : String!
+    var text : String!
+    var data : GruopModel?
+    
+    required init() {}
+}
+
 class GruopModel: HandyJSON {
     var communityHomePageFirstPlateView     : PlateViewModel?
     var communityHomePageSecondPlateView    : PlateViewModel?
     var communityHomePageWaterFallPlateView : PlateViewModel?
     
-    required init() {
-        
-    }
+    required init() { }
 }
 
 class PlateViewModel: HandyJSON {
@@ -53,10 +59,7 @@ class PlateViewModel: HandyJSON {
         }
     }
     
-    required init() {
-        
-    }
-    
+    required init() { }
 }
 
 class RecommendArticleItemList: HandyJSON {
@@ -64,9 +67,7 @@ class RecommendArticleItemList: HandyJSON {
     var text : String!
     var data : [PlateViewsItem]?
     
-    required init() {
-        
-    }
+    required init() { }
 }
 
 class PlateViewsItem: HandyJSON{
@@ -85,15 +86,15 @@ class PlateViewsItem: HandyJSON{
     var type      :Int = 0
     var readCount :Int = 0
     
-    var isVideo   :Bool = false
+    var isVideo        = false
+    var isFirstLoadImg = true
+    
     
     var FileSize    :Int = 0
     var ImageHeight :CGFloat = 0
     var ImageWidth  :CGFloat = 0 //3522827
     let bottomH:CGFloat = 60
     
-    required init() {
-        
-    }
+    required init() { }
 }
 

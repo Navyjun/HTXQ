@@ -36,10 +36,23 @@ let timeoutClosure = {(endpoint: Endpoint<HTApi>, closure: MoyaProvider<HTApi>.R
 let ApiProvider = MoyaProvider<HTApi>()
 let ApiLoadingProvider = MoyaProvider<HTApi>(requestClosure: timeoutClosure, plugins: [LoadingPlugin])
 
-
+// http://api.htxq.net/cactus/discovery/discoveryHomePageBannerList?city=%E6%B7%B1%E5%9C%B3
+// http://api.htxq.net/cactus/bbs/recommendBbs?pageIndex=0
+// http://api.htxq.net/cactus/bbs/getBbsCircleList?type=1
+// http://api.htxq.net/cactus/bbs/getBbsListByCircle?circle=fff61da9-5360-4c9b-a428-a147f42b654e&userId=3848f14b-e6b7-4155-af1b-cc1093b40d22&pageIndex=0
 enum HTApi {
     case getHomePage(city:String)
     case getRecommendArticleList(pageIndex:Int)
+    
+    case getResearchCommunityBannerList(city:String)
+    case getResearchCommunityFirstPageInfo
+    case getNewResearchCommunitys(pageIndex:Int)
+    
+    case getDiscoveryHomePageBannerList(city:String)
+    case getDiscoveryRecommendBbs(pageIndex:Int)
+    
+    case getBbsCircleList(type:Int)
+    case getBbsListByCircle(circle:String,pageIdex:Int)
 }
 
 extension HTApi: TargetType{
@@ -52,6 +65,14 @@ extension HTApi: TargetType{
         switch self {
         case .getHomePage: return "communityHomePage/getHomePageForNewVersion"
         case .getRecommendArticleList: return "sysArticle/getRecommendArticleListV2"
+        case .getResearchCommunityBannerList: return "researchCommunity/getBannerList"
+        case .getResearchCommunityFirstPageInfo: return "researchCommunity/getResearchCommunityFirstPageInfo"
+        case .getNewResearchCommunitys: return "researchCommunity/getNewResearchCommunitys"
+        case .getDiscoveryHomePageBannerList : return "discovery/discoveryHomePageBannerList"
+        case .getDiscoveryRecommendBbs: return "bbs/recommendBbs"
+        case .getBbsCircleList: return "bbs/getBbsCircleList"
+        case .getBbsListByCircle: return "bbs/getBbsListByCircle"
+            
         }
     }
     
@@ -73,6 +94,28 @@ extension HTApi: TargetType{
             parmeters["pageIndex"]  = pageIndex
             parmeters["customerId"] = "e124f7e6-6fb5-4016-bfca-193007619002"
             parmeters["token"]      = "235C15369ADE6F17B649C4E06A68FDB2"
+            
+        case .getResearchCommunityBannerList(let city):
+            parmeters["city"] = city
+            
+        case .getResearchCommunityFirstPageInfo: break
+            
+        case .getNewResearchCommunitys(let pageIndex):
+            parmeters["pageIndex"]  = pageIndex
+            
+        case .getDiscoveryHomePageBannerList(let city):
+            parmeters["city"] = city
+            
+        case .getDiscoveryRecommendBbs(let pageIndex):
+            parmeters["pageIndex"]  = pageIndex
+            
+        case .getBbsCircleList(let type):
+            parmeters["type"] = type
+            
+        case .getBbsListByCircle(let circle, let pageIndex):
+            parmeters["circle"] = circle
+            parmeters["userId"] = "e124f7e6-6fb5-4016-bfca-193007619002"
+            parmeters["pageIndex"] = pageIndex
         }
         
         return .requestParameters(parameters: parmeters, encoding: URLEncoding.default)
@@ -108,19 +151,19 @@ extension MoyaProvider {
     @discardableResult
     open func request<T: HandyJSON>(_ target: Target,
                                     model: T.Type,
-                                    completion: ((_ returnData: T?, _ code: String) -> Void)?) -> Cancellable? {
+                                    completion: ((_ returnData: T?, _ error: Error?) -> Void)?) -> Cancellable? {
         
         return request(target, completion: { (result) in
             guard let completion = completion else { return }
             if result.error != nil {
-                completion(nil,"出错")
+                completion(nil,result.error)
                 return
             }
-            guard let returnData = try? result.value?.mapModel(ResponseData<T>.self) else {
-                completion(nil,"解析出错")
+            guard let returnData = try? result.value?.mapModel(model.self) else {
+                completion(nil,nil)
                 return
             }
-            completion(returnData!.data,returnData!.code)
+            completion(returnData!,nil)
         })
     }
 }
