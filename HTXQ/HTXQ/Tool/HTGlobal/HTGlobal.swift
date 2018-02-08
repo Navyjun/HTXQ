@@ -15,6 +15,7 @@ public let kScreenWidth = UIScreen.main.bounds.width
 public let kScreenHeight = UIScreen.main.bounds.height
 public let kNavBarH = 64.0
 
+public let kUserHeadPlaceholder = "ic_account"
 public let kPlaceholder = "placehodlerX"
 public let kPlaceholderBig = "LOGO_85x85_"
 

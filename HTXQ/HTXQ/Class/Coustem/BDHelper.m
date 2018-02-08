@@ -24,12 +24,12 @@
     static YYWebImageManager *manager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSString *path = [[UIApplication sharedApplication].cachesPath stringByAppendingPathComponent:@"buddydynamic.avatar"];
+        NSString *path = [[UIApplication sharedApplication].cachesPath stringByAppendingPathComponent:@"htxq.avatar"];
         YYImageCache *cache = [[YYImageCache alloc] initWithPath:path];
         manager = [[YYWebImageManager alloc] initWithCache:cache queue:[YYWebImageManager sharedManager].queue];
         manager.sharedTransformBlock = ^(UIImage *image, NSURL *url) {
             if (!image) return image;
-            return [image imageByRoundCornerRadius:200]; // a large value
+            return [image imageByRoundCornerRadius:300]; // a large value
         };
     });
     return manager;

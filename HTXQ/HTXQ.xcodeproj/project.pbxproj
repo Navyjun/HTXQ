@@ -20,6 +20,7 @@
 		EE80C9B2201879E20064B5B7 /* HTBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE80C9B1201879E20064B5B7 /* HTBaseView.swift */; };
 		EE80C9B420187A520064B5B7 /* HTBaseCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE80C9B320187A520064B5B7 /* HTBaseCollectionViewController.swift */; };
 		EE80C9B620187CCE0064B5B7 /* HTInterestHeadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE80C9B520187CCE0064B5B7 /* HTInterestHeadCell.swift */; };
+		EE916AC82027FBCD004A2B5F /* HTCircleOfFriendsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE916AC72027FBCD004A2B5F /* HTCircleOfFriendsVC.swift */; };
 		EEA3CD6E2015B48A00D334E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3CD6D2015B48A00D334E2 /* AppDelegate.swift */; };
 		EEA3CD752015B48A00D334E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEA3CD742015B48A00D334E2 /* Assets.xcassets */; };
 		EEA3CD782015B48A00D334E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEA3CD762015B48A00D334E2 /* LaunchScreen.storyboard */; };
@@ -69,6 +70,7 @@
 		EE80C9B1201879E20064B5B7 /* HTBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTBaseView.swift; sourceTree = "<group>"; };
 		EE80C9B320187A520064B5B7 /* HTBaseCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTBaseCollectionViewController.swift; sourceTree = "<group>"; };
 		EE80C9B520187CCE0064B5B7 /* HTInterestHeadCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTInterestHeadCell.swift; sourceTree = "<group>"; };
+		EE916AC72027FBCD004A2B5F /* HTCircleOfFriendsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTCircleOfFriendsVC.swift; sourceTree = "<group>"; };
 		EEA3CD6A2015B48A00D334E2 /* HTXQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HTXQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEA3CD6D2015B48A00D334E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEA3CD742015B48A00D334E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -404,6 +406,7 @@
 				EEC383B3202463C9008A1963 /* HTFRecommendViewController.swift */,
 				EEC383B1202463C9008A1963 /* HTFSubscribeViewController.swift */,
 				EEA3CDA72015C2B400D334E2 /* HTFindViewController.swift */,
+				EE916AC72027FBCD004A2B5F /* HTCircleOfFriendsVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -669,6 +672,7 @@
 				EEC383BD202463D7008A1963 /* HTDisBbsCell.swift in Sources */,
 				EEA3CDA62015C28300D334E2 /* HTTopicViewController.swift in Sources */,
 				EEC383C0202463E1008A1963 /* HTFindModel.swift in Sources */,
+				EE916AC82027FBCD004A2B5F /* HTCircleOfFriendsVC.swift in Sources */,
 				EE80C9B420187A520064B5B7 /* HTBaseCollectionViewController.swift in Sources */,
 				EE80C9B2201879E20064B5B7 /* HTBaseView.swift in Sources */,
 				EEC383CC2024644E008A1963 /* ZCycleViewCell.swift in Sources */,

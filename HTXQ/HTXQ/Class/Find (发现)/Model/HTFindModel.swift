@@ -57,6 +57,8 @@ class DiscoveryCircleItem: HandyJSON {
     var name = ""
     var pageIndex = 0
     var scrollY:CGFloat = 0.0
+    var offsetY:CGFloat = 0.0
+    
     var items = [DiscoveryBbsItem]()
     required init() {}
 }
@@ -69,7 +71,7 @@ class DiscoveryBbsList: HandyJSON {
 }
 
 class DiscoveryBbsItem: HandyJSON {
-    public let headViewH:CGFloat = 70.0
+    public let headViewH:CGFloat = 76.0
     public let opationHandleVH:CGFloat = 44.0
     public let commMargin:CGFloat = 15.0
     public let titleSize:CGFloat = 14.0
@@ -162,7 +164,7 @@ class AuthorItem: HandyJSON {
     var userName    = ""
     var headImg     = ""
     var auth        = ""
-    var signature   = ""
+    var signature   = "这个家伙很懒,什么也没留"
     
     required init() {}
 }

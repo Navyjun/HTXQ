@@ -63,8 +63,14 @@ class HTDisBbsCell: UITableViewCell {
     
     public func configCell(_ item:DiscoveryBbsItem) {
         dataItem = item
+        authorIcon.setImageWith(URL.init(string: item.bbsAuthor.headImg),
+                                placeholder: UIImage.init(named: kUserHeadPlaceholder),
+                                options: .setImageWithFadeAnimation,
+                                manager: BDHelper.avatarImageManager(),
+                                progress: nil,
+                                transform: nil,
+                                completion: nil)
         
-        authorIcon.setImageWith(URL(string:(item.bbsAuthor.headImg)), options: .setImageWithFadeAnimation)
         authorNameL.text = item.bbsAuthor.userName
         authorSignLabel.text = item.bbsAuthor.signature
         sendTimeLabel.text = item.createDate

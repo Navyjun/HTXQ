@@ -24,8 +24,16 @@ class HTFCircleViewController: HTBaseViewController {
         st.frame = CGRect.init(x: 0.0, y: kNavBarH, width: Double(kScreenWidth), height: Double(circleListH))
         st.indexChangeBlock = { [weak self] (index:Int) in
             if index < self!.circleItemArray.count {
+                self!.selectedCircleItem.offsetY = self!.tableView.contentOffset.y
                 self!.selectedCircleItem = self!.circleItemArray[index]
-                self!.loadBbsListByCircle(self!.selectedCircleItem,false)
+                self!.tableView.reloadData()
+                if self!.selectedCircleItem.items.count == 0 {
+                    self!.tableView.htFoot.isHidden = true
+                    self!.loadBbsListByCircle(self!.selectedCircleItem,true)
+                }else{
+                    self!.view.layoutIfNeeded()
+                    self!.tableView.setContentOffset(CGPoint.init(x: 0, y: self!.selectedCircleItem.offsetY), animated: false)
+                }
             }
         }
         return st
@@ -81,7 +89,7 @@ class HTFCircleViewController: HTBaseViewController {
             }
             
             self!.selectedCircleItem = self!.circleItemArray.first!
-            self!.loadBbsListByCircle(self!.selectedCircleItem,false)
+            self!.loadBbsListByCircle(self!.selectedCircleItem,true)
             self!.segment.sectionTitles = titleArray
             self!.segment.setSelectedSegmentIndex(0, animated: false)
         }
@@ -100,13 +108,21 @@ class HTFCircleViewController: HTBaseViewController {
             if error != nil || bbsList == nil || bbsList?.data == nil {
                 return
             }
+            
+            if bbsList!.data?.count == 0 {
+                self!.tableView.htFoot.endRefreshingWithNoMoreData()
+            }
+            
             circleItem.pageIndex += 1
             for item in bbsList!.data! {
                 let _ = item.cellHeight
                 circleItem.items.append(item)
             }
-            //circleItem.items.append(contentsOf: bbsList!.data!)
             self!.tableView.reloadData()
+            if isFirest {
+                self!.view.layoutIfNeeded()
+                self!.tableView.setContentOffset(CGPoint.init(x: 0, y: 0), animated: false)
+            }
         }
     }
 
