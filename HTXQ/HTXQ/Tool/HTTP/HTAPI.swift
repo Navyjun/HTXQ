@@ -136,8 +136,8 @@ extension Response {
     func mapModel<T: HandyJSON>(_ type: T.Type) throws -> T {
         let jsonString = String(data: data, encoding: .utf8)
         
-//        let dict = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers)
-//        HTLog("dict = \(String(describing: dict))")
+        let dict = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+        HTLog("dict = \(String(describing: dict))")
         
         guard let model = JSONDeserializer<T>.deserializeFrom(json: jsonString) else {
             throw MoyaError.jsonMapping(self)

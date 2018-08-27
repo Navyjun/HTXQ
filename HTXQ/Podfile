@@ -7,7 +7,7 @@ inhibit_all_warnings!
 target 'HTXQ' do
   pod 'SnapKit'
   pod 'Moya'
-  pod 'HandyJSON', '~> 4.0.0-beta.1'
+  pod 'HandyJSON', '~> 4.1.1'
   pod 'MJRefresh'
   pod 'IQKeyboardManagerSwift'
   pod 'YYKit'

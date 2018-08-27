@@ -35,6 +35,9 @@ class HTResearchSocietyVC: HTBaseViewController {
         tb.dataSource = self
         tb.delegate = self
         tb.rowHeight = 256
+        tb.estimatedRowHeight = 0.0;
+        tb.estimatedSectionFooterHeight = 0.0;
+        tb.estimatedSectionHeaderHeight = 0.0;
         tb.backgroundColor = UIColor.init(hexString: "fafafa")
         tb.register(HTRCTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(HTRCTableViewCell.self))
         tb.htHead = HTRefreshAutoHeader { [weak self] in

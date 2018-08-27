@@ -44,6 +44,9 @@ class HTFCircleViewController: HTBaseViewController {
         tb.separatorStyle = .none
         tb.dataSource = self
         tb.delegate = self
+        tb.estimatedRowHeight = 0.0;
+        tb.estimatedSectionHeaderHeight = 0.0;
+        tb.estimatedSectionFooterHeight = 0.0;
         tb.register(UINib.init(nibName: "HTDisBbsCell", bundle: Bundle.main), forCellReuseIdentifier: "HTDisBbsCell")
         tb.htHead = HTRefreshAutoHeader { [weak self] in
             self!.loadBbsListByCircle(self!.selectedCircleItem, true)
